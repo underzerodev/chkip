@@ -31,9 +31,9 @@
                     results.forEach((result, index) => {
                         const ip = result.match(/Your (IPv[46]) address is: ([^\s]+)/);
                         if (ip) {
-                            output += `<p>${urls[index].replace(/^https?:\/\//, '').split('.')[0];}: ${ip[1]} - ${ip[2]}</p>`;
+                            output += `<p>${urls[index].replace(/^https?:\/\//, '').split('.')[0]}: ${ip[1]} - ${ip[2]}</p>`;
                         } else {
-                            output += `<p>${urls[index].replace(/^https?:\/\//, '').split('.')[0];}: Failed to parse IP</p>`;
+                            output += `<p>${urls[index].replace(/^https?:\/\//, '').split('.')[0]}: Failed to parse IP</p>`;
                         }
                     });
                     $('#result').html(output);
