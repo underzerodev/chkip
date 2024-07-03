@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Fetcher</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>IP Fetcher</h1>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            const urls = [
+                'http://i06.14devlab.co/',
+                'http://i04.underzero.cc/'
+            ];
+
+            function fetchIP(url) {
+                return $.ajax({
+                    url: url,
+                    method: 'GET',
+                    dataType: 'text'
+                });
+            }
+
+            Promise.all(urls.map(fetchIP))
+                .then(results => {
+                    let output = '';
+                    results.forEach((result, index) => {
+                        const ip = result.match(/Your (IPv[46]) address is: ([^\s]+)/);
+                        if (ip) {
+                            output += `<p>${urls[index]}: ${ip[1]} - ${ip[2]}</p>`;
+                        } else {
+                            output += `<p>${urls[index]}: Failed to parse IP</p>`;
+                        }
+                    });
+                    $('#result').html(output);
+                })
+                .catch(error => {
+                    $('#result').html('<p>Error fetching data: ' + error.message + '</p>');
+                });
+        });
+    </script>
+</body>
+</html>
