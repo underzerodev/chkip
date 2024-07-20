@@ -9,7 +9,7 @@
 <body>
     <h1>IP Fetcher</h1>
     <div id="result"></div>
-    <div id="connection"></div>
+    <div id="">Connect: <span id="connection">-</span></div>
 
     <script>
         $(document).ready(function() {
@@ -38,7 +38,7 @@
                         }
                     });
                     $('#result').html(output);
-
+                    console.log('navigator', navigator)
                     if ('connection' in navigator) {
                         const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
                         $('#connection').html(`connect: ${connection.type}`);
