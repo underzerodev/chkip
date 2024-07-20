@@ -41,9 +41,9 @@
                     console.log('navigator', navigator)
                     if ('connection' in navigator) {
                         const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-                        $('#connection').html(`connect: ${connection.type}`);
+                        $('#connection').html(${connection.type});
                     } else {
-                        return 'unknown';
+                        $('#connection').html(unknown);
                     }
                     
                 })
