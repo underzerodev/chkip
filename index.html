@@ -9,6 +9,7 @@
 <body>
     <h1>IP Fetcher</h1>
     <div id="result"></div>
+    <div id="connection"></div>
 
     <script>
         $(document).ready(function() {
@@ -37,6 +38,14 @@
                         }
                     });
                     $('#result').html(output);
+
+                    if ('connection' in navigator) {
+                        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                        $('#connection').html(`connect: ${connection.type}`);
+                    } else {
+                        return 'unknown';
+                    }
+                    
                 })
                 .catch(error => {
                     $('#result').html('<p>Error fetching data: ' + error.message + '</p>');
